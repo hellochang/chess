@@ -54,13 +54,21 @@ When started, input
 move coordinate coordinate
 ```
 
-to move piece as human.
+to move a piece as human.
 
-You also have to indicate a valid piece to promote when necessary.
+You have to indicate a valid piece to promote if needed.
 
 ```
 move coordinate coordinate piece
 ```
+
+For human players, you can input
+
+```
+resign
+```
+
+to give up this game. (Thus opponent wins.)
 
 Input
 
@@ -78,6 +86,8 @@ regret
 After each move, the program will print the current board to tty and show who is the next player.
 
 ## Configure the board
+
+Before a game started, or after a game finished, you can setup the board.
 
 To add a piece by
 
@@ -101,6 +111,16 @@ Where color is one of
 ```
 {white, black}
 ```
+
+When you finish setting up, input
+
+```
+done
+```
+
+to quit setup mode.
+
+Notice that you are only allowed to quite setup mode when the board is valid.
 
 ## Quit
 
