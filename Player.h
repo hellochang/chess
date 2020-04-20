@@ -42,6 +42,9 @@ protected:
     bool verify(int origIdx, int row, int col,
                 bool checkMove = true, bool checkAtk = true);
 
+    // move out king-killing moves from three "moveable" sets
+    void avoidKingKillingMove();
+
     // Prints moving info after moved
     void printMoveInfo(int orig, int dest);
 

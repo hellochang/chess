@@ -6,9 +6,11 @@ Computer::Computer(Board &b, bool isWhite, int level)
 int Computer::move()
 {
     eval();
-    oppo.lock()->eval(); // Computers need opposite info updated as well
+    oppo.lock()->eval();
     if (KIdx == -1)
         return 1;
+    avoidKingKillingMove(); // throw away king killing moves
+
     vector<string> words;
     while (getWords(words))
     {
