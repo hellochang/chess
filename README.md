@@ -105,11 +105,11 @@ Where color is one of
 
 ## Quit
 
-Not matter you are in a game or setting up the board, you can always quit the program by sending EOF signal
+Whether you are in the middle of a chess game, finishing a chess game or setting up the chess board, you can always quit the program by sending EOF signal if you wish
 
 ```
 Ctrl + D
 ```
-If you are in a game, the game will be abandoned (no score for both sides)
+If you are in a game, the game will be abandoned (no score for both sides). 
 
 Before the program exits, it will print the final scores for both sides.s
