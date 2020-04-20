@@ -112,4 +112,4 @@ Ctrl + D
 ```
 If you are in a game, the game will be abandoned (no score for both sides). 
 
-Before the program exits, it will print the final scores for both sides.s
+Before the program exits, it will print the final scores for both sides.
