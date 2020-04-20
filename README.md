@@ -4,7 +4,7 @@ The chess game.
 
 ## Extra Features
 
-You can regret your moves, as many moves as you want.
+You can regret and undo as many moves of your moves as you want.
 
 ## Compile & Run
 
