@@ -47,12 +47,6 @@ protected:
     // move out king-killing moves from three "moveable" sets
     void avoidKingKillingMove();
 
-    // Prints moving info after moved
-    void printMoveInfo(int orig, int dest);
-
-    // Prints promotion info after promoted
-    void printPromoInfo(int orig, int dest, char promotedTo);
-
 public:
     Player(Board &b, bool isWhite);
 
