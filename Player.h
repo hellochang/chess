@@ -20,6 +20,8 @@ protected:
 
     int KIdx = -1;               // index for King
     int enPassantIdx = -1;       // index for the pawn possible be captured by en passant
+    bool canLongCastling;        // indicate if the player can do long castling or not, init by ctor
+    bool canShortCastling;       // indicate if the player can do short castling or not, init by ctor
     set<int> idx;                // indices for my remaining pieces
     map<int, set<int>> moveIdx;  // indices that are movable and corresponding dests
     map<int, set<int>> atkIdx;   // indices that can attack (but not check) and corresponding dests

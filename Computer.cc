@@ -9,7 +9,20 @@ int Computer::move()
     oppo.lock()->eval();
     if (KIdx == -1)
         return 1;
-    avoidKingKillingMove(); // throw away king killing moves
+
+    // throw away king killing moves
+    avoidKingKillingMove();
+
+    // provide castling moves when possible
+    int kRow = toRow(KIdx), kCol = toCol(KIdx);
+    int kshortDest = toIdx(kRow, kCol + 2), kLongDest = toIdx(kRow, kCol - 3);
+    if ((canShortCastling || canLongCastling) && !inCheck()) // no castling under checking
+    {
+        if (canShortCastling && b.cells[toIdx(kRow, kCol + 1)] == 0 && b.cells[toIdx(kRow, kCol + 2)] == 0)
+            moveIdx[KIdx].insert(kshortDest);
+        if (canLongCastling && b.cells[toIdx(kRow, kCol - 1)] == 0 && b.cells[toIdx(kRow, kCol - 2)] == 0 && b.cells[toIdx(kRow, kCol - 3)] == 0)
+            moveIdx[KIdx].insert(kLongDest);
+    }
 
     vector<string> words;
     while (getWords(words))
@@ -122,11 +135,56 @@ void Computer::moveLv1to3(int level)
     }
     else
     {
-        //  if this is a en passant move, capture that pawn first
+        //  if this is a en passant move, capture that pawn
         if (enPassantMove.size() && enPassantMove[0] == orig && enPassantMove[1] == dest)
-            b.cells[enPassantMove[3]] = 0;
+            b.cells[enPassantMove[2]] = 0;
+        enPassantMove.clear();
+
+        //  if this move gives opponent a chance to en passant, flag it
+        if ((b.cells[orig] == 'P' && toRow(orig) == 2 && toRow(dest) == 4) ||
+            (b.cells[orig] == 'p' && toRow(orig) == 7 && toRow(dest) == 5))
+            enPassantIdx = dest;
+
+        // if this is a castling move, move correspond rook
+        int kRow = toRow(KIdx), kCol = toCol(KIdx);
+        int kshortDest = toIdx(kRow, kCol + 2), kLongDest = toIdx(kRow, kCol - 3);
+        if ((canShortCastling || canLongCastling) && orig == KIdx)
+        {
+            if (dest == kshortDest)
+            {
+                b.cells[toIdx(kRow, kCol + 1)] = b.cells[toIdx(kRow, kCol + 3)];
+                b.cells[toIdx(kRow, kCol + 3)] = 0;
+            }
+            else if (dest == kLongDest)
+            {
+                b.cells[toIdx(kRow, kCol - 2)] = b.cells[toIdx(kRow, kCol - 4)];
+                b.cells[toIdx(kRow, kCol - 4)] = 0;
+            }
+        }
+
         b.cells[dest] = b.cells[orig];
         b.cells[orig] = 0;
+
+        // if king/rooks is moved, disable corresponding castling
+        if (orig == KIdx)
+        {
+            canLongCastling = false;
+            canShortCastling = false;
+        }
+        if (isWhite)
+        {
+            if (b.cells[toIdx(1, 1)] != 'R')
+                canLongCastling = false;
+            if ((b.cells[toIdx(1, 8)]) != 'R')
+                canShortCastling = false;
+        }
+        else
+        {
+            if (b.cells[toIdx(8, 1)] != 'r')
+                canLongCastling = false;
+            if ((b.cells[toIdx(8, 8)]) != 'r')
+                canShortCastling = false;
+        }
     }
 }
 
