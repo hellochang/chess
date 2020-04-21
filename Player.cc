@@ -97,6 +97,24 @@ bool Player::verify(int origIdx, int row, int col, bool checkMove, bool checkAtk
     return cont;
 }
 
+void Player::avoidKingKillingMove()
+{
+    set<int> underAtk; // poses under attack
+    for (auto i : oppo.lock()->atkIdx)
+        for (auto j : i.second)
+            if (!underAtk.count(j))
+                underAtk.insert(j);
+    if (moveIdx.count(KIdx))
+        for (auto i : underAtk)
+            moveIdx[KIdx].erase(i);
+    if (atkIdx.count(KIdx))
+        for (auto i : underAtk)
+            atkIdx[KIdx].erase(i);
+    if (checkIdx.count(KIdx))
+        for (auto i : underAtk)
+            checkIdx[KIdx].erase(i);
+}
+
 bool Player::eval()
 {
     KIdx = -1;

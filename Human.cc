@@ -4,9 +4,12 @@ Human::Human(Board &b, bool isWhite) : Player(b, isWhite) {}
 
 int Human::move()
 {
+    // init
     eval();
+    oppo.lock()->eval();
     if (KIdx == -1)
         return 1;
+    avoidKingKillingMove(); // throw away king killing moves
     vector<string> words;
     while (getWords(words))
     {

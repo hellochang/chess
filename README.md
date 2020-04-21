@@ -4,7 +4,7 @@ The chess game.
 
 ## Extra Features
 
-You can regret your moves, as many moves as you want.
+You can regret and undo as many of your moves as you want.
 
 ## Compile & Run
 
@@ -19,16 +19,17 @@ make
 ```
 ./chess
 ```
-For graphics, execute with flag --graphic
+The above commad will have a text display.
+For graphic interface, execute with flag --graphic
 ```
 ./chess --graphic
 ```
 
 ## Usage
 
-When the program is running, you can either start a game, configure the board before starting, or quit.
+When the program is running, you can either start a game, configure the board before starting, or quit the game.
 
-All coordinates must be valid, among a1 - h8.
+All coordinates must be valid coordinates on a standard chess board, among a1 - h8.
 
 All pieces must be valid. (eg R, B, k, p ...)
 
@@ -54,13 +55,21 @@ When started, input
 move coordinate coordinate
 ```
 
-to move piece as human.
+to move a piece as human.
 
-You also have to indicate a valid piece to promote when necessary.
+You have to indicate a valid piece to promote if needed.
 
 ```
 move coordinate coordinate piece
 ```
+
+For human players, you can input
+
+```
+resign
+```
+
+to give up this game. (Thus opponent wins.)
 
 Input
 
@@ -78,6 +87,8 @@ regret
 After each move, the program will print the current board to tty and show who is the next player.
 
 ## Configure the board
+
+Before a game started, or after a game finished, you can setup the board.
 
 To add a piece by
 
@@ -102,13 +113,23 @@ Where color is one of
 {white, black}
 ```
 
+When you finish setting up, input
+
+```
+done
+```
+
+to quit setup mode.
+
+Notice that you are only allowed to quite setup mode when the board is valid.
+
 ## Quit
 
-Not matter you are in a game or setting up the board, you can always quit the program by sending EOF signal
+Whether you are in the middle of a chess game, finishing a chess game or setting up the chess board, you can always quit the program by sending EOF signal if you wish
 
 ```
 Ctrl + D
 ```
-If you are in a game, the game will be abandoned (no score for both sides)
+If you are in a game, the game will be abandoned (no score for both sides). 
 
-Before the program exits, it will print the final scores for both sides.s
+Before the program exits, it will print the final scores for both sides.
