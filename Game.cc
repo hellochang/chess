@@ -1,5 +1,6 @@
 #include "Game.h"
 
+// startGame() begins the game
 void Game::startGame()
 {
     printMenu();
@@ -46,6 +47,8 @@ void Game::startGame()
     printScores();
 }
 
+
+// run() runs game on current board
 bool Game::run()
 {
     p1->bindOppo(p2);
@@ -96,6 +99,8 @@ bool Game::run()
     }
 }
 
+
+// setup() sets up board
 bool Game::setup()
 {
     b.clear();
@@ -152,6 +157,8 @@ bool Game::setup()
     return false;
 }
 
+
+// printScores() prints players' final game scores by colour
 void Game::printScores()
 {
     cout << "Final Score:" << endl
@@ -159,6 +166,8 @@ void Game::printScores()
          << "Black: " << to_string(BScore / 2) + (BScore % 2 ? ".5" : "") << endl;
 }
 
+
+// validBoard() checks validity of chess board
 bool Game::validBoard()
 {
     // Creates two "virtual players" to check validity
@@ -169,6 +178,8 @@ bool Game::validBoard()
     return p1->eval() && p2->eval() && !p1->inCheck() && !p2->inCheck();
 }
 
+
+// printMenu() prints the menu of the game
 void Game::printMenu()
 {
     cout << "*************************   CHESS   *************************" << endl
@@ -177,6 +188,8 @@ void Game::printMenu()
          << "Type setup to create a board" << endl;
 }
 
+
+// saveBoard() saves the chess Board for possible future undos.
 void Game::saveBoard()
 {
     history.push_back(b);

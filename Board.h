@@ -11,6 +11,7 @@ public:
 
     // Init to empty
     Board();
+
     // Init to std board. n's value doesn't matter here.
     Board(int n);
 
