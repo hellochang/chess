@@ -1,7 +1,10 @@
 #include "Board.h"
 
+// Board() initialize to an empty Board
 Board::Board() : cells{vector<char>(64, '\0')} {}
 
+
+// Board(int n) Init to standard chess board.
 Board::Board(int n) : cells{vector<char>{'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R',
                                          'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P',
                                          '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0',
@@ -13,21 +16,30 @@ Board::Board(int n) : cells{vector<char>{'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R',
 {
 }
 
+
+// piece(idx) gets piece by cells index
 char &Board::piece(int idx)
 {
     return cells[idx];
 }
 
+
+// piece(row, col) gets piece by row and column numbers
 char &Board::piece(int row, int col)
 {
     return cells[toIdx(row, col)];
 }
+
+
+// clear() clears board (for setup)
 void Board::clear()
 {
     isWhiteTurn = true;
     cells = vector<char>(64, '\0');
 }
 
+
+// printBoard() prints the entire chess board
 void Board::printBoard()
 {
     cout << endl

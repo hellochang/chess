@@ -1,11 +1,16 @@
 #include "Player.h"
 
+// Player(b, isWhite) constructs the Player object
 Player::Player(Board &b, bool isWhite)
     : b{b}, isWhite{isWhite}, myPieces{isWhite ? WHITEPIECESET : BLACKPIECESET},
       canLongCastling{!b.isCustomized}, canShortCastling{!b.isCustomized} {}
 
+
+// Player() destroys the Player object
 Player::~Player() {}
 
+
+// 
 void Player::checkSameRC(int origIdx, int row, int col)
 {
     for (int j = col + 1;; ++j)
@@ -246,6 +251,7 @@ void Player::bindOppo(shared_ptr<Player> other)
     oppo = other;
 }
 
+// inCheck() returns true if checked
 bool Player::inCheck()
 {
     return oppo.lock()->checkIdx.size() > 0;
