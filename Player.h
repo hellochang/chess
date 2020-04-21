@@ -20,6 +20,8 @@ protected:
 
     int KIdx = -1;               // index for King
     int enPassantIdx = -1;       // index for the pawn possible be captured by en passant
+    bool canLongCastling;        // indicate if the player can do long castling or not, init by ctor
+    bool canShortCastling;       // indicate if the player can do short castling or not, init by ctor
     set<int> idx;                // indices for my remaining pieces
     map<int, set<int>> moveIdx;  // indices that are movable and corresponding dests
     map<int, set<int>> atkIdx;   // indices that can attack (but not check) and corresponding dests
@@ -44,12 +46,6 @@ protected:
 
     // move out king-killing moves from three "moveable" sets
     void avoidKingKillingMove();
-
-    // Prints moving info after moved
-    void printMoveInfo(int orig, int dest);
-
-    // Prints promotion info after promoted
-    void printPromoInfo(int orig, int dest, char promotedTo);
 
 public:
     Player(Board &b, bool isWhite);

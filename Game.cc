@@ -4,7 +4,6 @@
 void Game::startGame()
 {
     printMenu();
-    bool customizedBoard = false;
 
     vector<string> words;
     for (; getWords(words);)
@@ -13,10 +12,7 @@ void Game::startGame()
         if (words.size() == 3 && words[0] == "game" &&
             VALIDPLAYERS.count(words[1]) && VALIDPLAYERS.count(words[2]))
         {
-            // If it the board has been set up, don't initialize it.
-            if (!customizedBoard)
-                b = Board(1);
-            customizedBoard = false;
+            // binding players
             if (words[1] == "human")
                 p1 = make_shared<Human>(b, true);
             else
@@ -25,18 +21,21 @@ void Game::startGame()
                 p2 = make_shared<Human>(b, false);
             else
                 p2 = make_shared<Computer>(b, false, words[2][8] - '0');
+
+            // If it the board has been set up, don't initialize it, and no castling
+            //  for players on it
             if (!run()) // reach EOF
                 break;
+            b = Board(1); // init board for next round
         }
         // setup
         else if (words.size() == 1 && words[0] == "setup")
         {
-            b = Board();
+            b = Board();  // empty the board
             if (!setup()) // reach EOF
                 break;
-            else
-                cout << "Setup completed." << endl;
-            customizedBoard = true;
+            cout << "Setup completed." << endl;
+            b.isCustomized = true;
         }
         // bad input
         else

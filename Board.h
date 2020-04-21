@@ -8,7 +8,7 @@ class Board
 public:
     vector<char> cells;
     bool isWhiteTurn = true;
-
+    bool isCustomized = false;
     // Init to empty
     Board();
 
@@ -26,7 +26,6 @@ public:
 
     // Prints board (before move)
     void printBoard();
-
 };
 
 #endif

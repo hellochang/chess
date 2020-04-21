@@ -13,7 +13,7 @@ private:
     // implemented so to avoid accumulating float type precision problem
     int WScore = 0;
     int BScore = 0;
-    Board b;
+    Board b{1};
     vector<Board> history;
     shared_ptr<Player> p1;
     shared_ptr<Player> p2;

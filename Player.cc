@@ -2,7 +2,8 @@
 
 // Player(b, isWhite) constructs the Player object
 Player::Player(Board &b, bool isWhite)
-    : b{b}, myPieces{isWhite ? WHITEPIECESET : BLACKPIECESET} {}
+    : b{b}, isWhite{isWhite}, myPieces{isWhite ? WHITEPIECESET : BLACKPIECESET},
+      canLongCastling{!b.isCustomized}, canShortCastling{!b.isCustomized} {}
 
 
 // Player() destroys the Player object
