@@ -19,6 +19,14 @@ void Display::printTextBoard(Board &b)
          << "  abcdefgh" << endl;
 }
 
+void Display::printGraphicBoard(Board &b)
+{
+    Xwindow w;
+    w.fillRectangle(0, 0, 500, 500, Xwindow::Blue);
+    w.drawString(50, 50, "Current board is:", Xwindow::Blue);
+    // todo
+}
+
 void Display::printBoard(Board &b)
 {
     printTextBoard(b);
@@ -27,11 +35,3 @@ void Display::printBoard(Board &b)
 }
 
 Display::Display(bool isGraphic) : isGraphic{isGraphic} {}
-
-void Display::printGraphicBoard(Board &b)
-{
-    Xwindow w;
-    w.fillRectangle(0, 0, 500, 500, Xwindow::Blue);
-    w.drawString(50, 50, "Current board is:", Xwindow::Blue);
-    // todo
-}
