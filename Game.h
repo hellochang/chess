@@ -8,15 +8,15 @@
 
 class Game
 {
-private:
     // W/B Score = 2 * real score
-    // implemented so to avoid accumulating float type precision problem
+    // implemented to avoid accumulating float type precision problem
     int WScore = 0;
     int BScore = 0;
     Board b{1};
     vector<Board> history;
     shared_ptr<Player> p1;
     shared_ptr<Player> p2;
+    bool isGraphic{false};
     
     // Runs game on current board
     bool run();
@@ -33,12 +33,15 @@ private:
     // Prints menu
     void printMenu();
 
-    // SaveCurrentBoardToHistory;
+    // Saves current Board to history field
     void saveBoard();
 
 public:
-    // Main logic goes here
+    // Main logic goes here and commands are interpreted
     void startGame();
+
+    // Set to true if the user choose graphic display
+    void setGraphic(bool graphic);
 };
 
 #endif

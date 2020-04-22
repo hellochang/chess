@@ -12,7 +12,6 @@ class Player
     friend class Computer;
     friend class Human;
 
-protected:
     Board &b;
     bool isWhite;
     const set<char> &myPieces;

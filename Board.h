@@ -7,8 +7,10 @@ class Board
 {
 public:
     vector<char> cells;
-    bool isWhiteTurn = true;
-    bool isCustomized = false;
+    bool isWhiteTurn{true};
+    bool isCustomized{false};
+    bool isGraphic{false};
+    
     // Init to empty
     Board();
 
@@ -26,6 +28,12 @@ public:
 
     // Prints board (before move)
     void printBoard();
+    
+    // Sets the graphics field to true or false
+    void setGraphic(bool graphic);
+
+    // Prints board graphically (before move)
+    void printGraphicBoard();
 };
 
 #endif

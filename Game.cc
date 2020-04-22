@@ -27,11 +27,16 @@ void Game::startGame()
             if (!run()) // reach EOF
                 break;
             b = Board(1); // init board for next round
+	    if (isGraphic) b.setGraphic(true);
+            #if 1
+	    cout << "b.isGraphic: " << b.isGraphic << endl;
+            #endif
         }
         // setup
         else if (words.size() == 1 && words[0] == "setup")
         {
             b = Board();  // empty the board
+	    if (isGraphic) b.setGraphic(true);
             if (!setup()) // reach EOF
                 break;
             cout << "Setup completed." << endl;
@@ -192,4 +197,10 @@ void Game::printMenu()
 void Game::saveBoard()
 {
     history.push_back(b);
+}
+
+
+// isGraphic() checks whether the graphic option is invoked
+void Game::setGraphic(bool graphic) {
+    isGraphic = graphic;
 }
