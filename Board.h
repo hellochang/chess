@@ -5,11 +5,11 @@
 
 class Board
 {
-public:
     vector<char> cells;
     bool isWhiteTurn{true};
     bool isCustomized{false};
 
+public:
     // Init to empty
     Board();
 
@@ -36,6 +36,9 @@ public:
 
     // Sets the isCustomized field to true or false
     void setCustomized(bool isCustom);
+
+    // returns the value of isCustomized
+    bool checkCustomized();
 
     // Gets isWhiteTurn field
     bool isBoardWhiteTurn();
