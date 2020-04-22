@@ -79,6 +79,15 @@ move
 
 for computer players to take a move.
 
+Anytime you want to switch diffculty level duing the game, input
+
+```
+setlevel lv
+```
+lv must be a number between 1 and 4 inclusively.
+
+You can try to set the level for human player, but only to get a warning.
+
 Ass a human player, you can also regret, simply input
 
 ```
