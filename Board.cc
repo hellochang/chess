@@ -52,6 +52,11 @@ void Board::setCustomized(bool isCustom)
     isCustomized = isCustom;
 }
 
+bool Board::checkCustomized()
+{
+    return isCustomized;
+}
+
 // // printBoard() prints the entire chess board
 // void Board::printBoard()
 // {
