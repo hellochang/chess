@@ -17,7 +17,7 @@ class Game
     vector<Board> history;
     shared_ptr<Player> p1;
     shared_ptr<Player> p2;
-//    Display display;
+    Display display;
     bool isGraphic{true};
 
     // Runs game on current board
