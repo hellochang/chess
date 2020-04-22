@@ -28,18 +28,13 @@ void Game::startGame()
             if (!run()) // reach EOF
                 break;
             b = Board(1); // init board for next round
-            if (isGraphic)
-                b.setGraphic(true);
-#if 1
-            cout << "game is graphic: " << isGraphic << endl;
-#endif
         }
         // setup
         else if (words.size() == 1 && words[0] == "setup")
         {
             b = Board(); // empty the board
-            if (isGraphic)
-                b.setGraphic(true);
+            // if (isGraphic)
+            //     b.setGraphic(true);
             if (!setup()) // reach EOF
                 break;
             cout << "Setup completed." << endl;
@@ -62,7 +57,7 @@ bool Game::run()
     saveBoard(); // save the initialized board to history
     for (;;)
     {
-        display.printBoard(b);
+        render.printBoard(b);
         cout << "Next Player to move is: Player"
              << (b.isBoardWhiteTurn() ? 1 : 2) << endl;
         shared_ptr<Player> cur = b.isBoardWhiteTurn() ? p1 : p2;
@@ -137,7 +132,7 @@ bool Game::setup()
             {
                 b.piece(words[2][1] - '0',
                         words[2][0] - 'a' + 1) = words[1][0];
-                display.printBoard(b);
+                render.printBoard(b);
             }
             else
                 badInput();
@@ -147,7 +142,7 @@ bool Game::setup()
             if (words.size() == 2 && validCoord(words[1]))
             {
                 b.piece(words[1][0] - 'a' + 1, words[1][1] - '0') = '\0';
-                display.printBoard(b);
+                render.printBoard(b);
             }
             else
                 badInput();
@@ -207,8 +202,6 @@ void Game::saveBoard()
 }
 
 // isGraphic() checks whether the graphic option is invoked
-void Game::setGraphic(bool graphic)
-{
-    isGraphic = graphic;
-}
+// todo
 
+Game::Game(bool isGraphic) : render{isGraphic} {}

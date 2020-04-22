@@ -9,8 +9,7 @@ int main(int argc, char **argv)
     }
     else if (argc == 2 && string{argv[1]} == "--graphic")
     {
-        Game game;
-        game.setGraphic(true);
+        Game game(true);
         game.startGame();
     }
     else

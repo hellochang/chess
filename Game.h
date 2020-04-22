@@ -5,7 +5,7 @@
 #include "Human.h"
 #include "Computer.h"
 #include "Board.h"
-#include "Display.h"
+#include "Render.h"
 
 class Game
 {
@@ -17,8 +17,7 @@ class Game
     vector<Board> history;
     shared_ptr<Player> p1;
     shared_ptr<Player> p2;
-    Display display;
-    bool isGraphic{false};
+    Render render;
 
     // Runs game on current board
     bool run();
@@ -42,8 +41,8 @@ public:
     // Main logic goes here and commands are interpreted
     void startGame();
 
-    // Set to true if the user choose graphic display
-    void setGraphic(bool graphic);
+    // Set isGraphic to true if the user choose graphic display
+    Game(bool isGraphic = false);
 };
 
 #endif

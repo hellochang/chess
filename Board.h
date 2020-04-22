@@ -9,7 +9,6 @@ public:
     vector<char> cells;
     bool isWhiteTurn{true};
     bool isCustomized{false};
-    bool isGraphic{false};
 
     // Init to empty
     Board();
