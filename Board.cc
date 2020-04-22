@@ -39,42 +39,42 @@ void Board::clear()
 }
 
 
-// printBoard() prints the entire chess board
-void Board::printBoard()
-{
-    cout << endl
-         << "Current board is:" << endl;
-    for (int row = 8; row >= 1; --row)
-    {
-        cout << row << " ";
-        for (int col = 1; col <= 8; ++col)
-        {
-            char pc = piece(row, col);
-            char BnW = (row + col) % 2 ? ' ' : '_';
-            cout << (pc ? pc : BnW);
-        }
-        cout << endl;
-    }
-    cout << endl
-         << "  abcdefgh" << endl;
-}
+// // printBoard() prints the entire chess board
+// void Board::printBoard()
+// {
+//     cout << endl
+//          << "Current board is:" << endl;
+//     for (int row = 8; row >= 1; --row)
+//     {
+//         cout << row << " ";
+//         for (int col = 1; col <= 8; ++col)
+//         {
+//             char pc = piece(row, col);
+//             char BnW = (row + col) % 2 ? ' ' : '_';
+//             cout << (pc ? pc : BnW);
+//         }
+//         cout << endl;
+//     }
+//     cout << endl
+//          << "  abcdefgh" << endl;
+// }
 
 
-// printGraphicBoard()
-printGraphicBoard() {
-    Xwindow w;
-    w.fillRectangle(0,0,500,500,Xwindow::Blue);
-    w.drawString(50, 50, "Current board is:", Xwindow::Blue);
-    for (int row = 8; row >= 1; --row)
-    {
-        cout << row << " ";
-        for (int col = 1; col <= 8; ++col)
-        {
-            char pc = piece(row, col);
-            char BnW = (row + col) % 2 ? ' ' : '_';
-            cout << (pc ? pc : BnW);
-        }
-        cout << endl;
-    }
-    cout << endl
-         << "  abcdefgh" << endl;
+// // printGraphicBoard()
+// printGraphicBoard() {
+//     Xwindow w;
+//     w.fillRectangle(0,0,500,500,Xwindow::Blue);
+//     w.drawString(50, 50, "Current board is:", Xwindow::Blue);
+//     for (int row = 8; row >= 1; --row)
+//     {
+//         cout << row << " ";
+//         for (int col = 1; col <= 8; ++col)
+//         {
+//             char pc = piece(row, col);
+//             char BnW = (row + col) % 2 ? ' ' : '_';
+//             cout << (pc ? pc : BnW);
+//         }
+//         cout << endl;
+//     }
+//     cout << endl
+//          << "  abcdefgh" << endl;

@@ -5,6 +5,7 @@
 #include "Human.h"
 #include "Computer.h"
 #include "Board.h"
+#include "Display.h"
 
 class Game
 {
@@ -17,7 +18,8 @@ private:
     vector<Board> history;
     shared_ptr<Player> p1;
     shared_ptr<Player> p2;
-    
+    Display display;
+
     // Runs game on current board
     bool run();
 
@@ -39,6 +41,8 @@ private:
 public:
     // Main logic goes here
     void startGame();
+
+    Game(bool isGraphic = false);
 };
 
 #endif

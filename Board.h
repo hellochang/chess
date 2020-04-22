@@ -24,8 +24,8 @@ public:
     // Clears board (for setup)
     void clear();
 
-    // Prints board (before move)
-    void printBoard();
+    // // Prints board (before move)
+    // void printBoard();
 };
 
 #endif

@@ -46,7 +46,6 @@ void Game::startGame()
     printScores();
 }
 
-
 // run() runs game on current board
 bool Game::run()
 {
@@ -55,7 +54,7 @@ bool Game::run()
     saveBoard(); // save the initialized board to history
     for (;;)
     {
-        b.printBoard();
+        display.printBoard(b);
         cout << "Next Player to move is: Player" << (b.isWhiteTurn ? 1 : 2) << endl;
         shared_ptr<Player> cur = b.isWhiteTurn ? p1 : p2;
         int &oppoScore = b.isWhiteTurn ? BScore : WScore;
@@ -98,7 +97,6 @@ bool Game::run()
     }
 }
 
-
 // setup() sets up board
 bool Game::setup()
 {
@@ -127,7 +125,7 @@ bool Game::setup()
                 validCoord(words[2]))
             {
                 b.piece(words[2][1] - '0', words[2][0] - 'a' + 1) = words[1][0];
-                b.printBoard();
+                display.printBoard(b);
             }
             else
                 badInput();
@@ -137,7 +135,7 @@ bool Game::setup()
             if (words.size() == 2 && validCoord(words[1]))
             {
                 b.piece(words[1][0] - 'a' + 1, words[1][1] - '0') = '\0';
-                b.printBoard();
+                display.printBoard(b);
             }
             else
                 badInput();
@@ -156,7 +154,6 @@ bool Game::setup()
     return false;
 }
 
-
 // printScores() prints players' final game scores by colour
 void Game::printScores()
 {
@@ -164,7 +161,6 @@ void Game::printScores()
          << "White: " << to_string(WScore / 2) + (WScore % 2 ? ".5" : "") << endl
          << "Black: " << to_string(BScore / 2) + (BScore % 2 ? ".5" : "") << endl;
 }
-
 
 // validBoard() checks validity of chess board
 bool Game::validBoard()
@@ -177,7 +173,6 @@ bool Game::validBoard()
     return p1->eval() && p2->eval() && !p1->inCheck() && !p2->inCheck();
 }
 
-
 // printMenu() prints the menu of the game
 void Game::printMenu()
 {
@@ -187,9 +182,10 @@ void Game::printMenu()
          << "Type setup to create a board" << endl;
 }
 
-
 // saveBoard() saves the chess Board for possible future undos.
 void Game::saveBoard()
 {
     history.push_back(b);
 }
+
+Game::Game(bool isGraphic = false) : display{isGraphic} {}
