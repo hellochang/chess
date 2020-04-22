@@ -1,6 +1,6 @@
 # Chess
 
-The chess game.
+The classic chess game.
 
 ## Extra Features
 
@@ -29,40 +29,46 @@ For graphic interface, execute with flag --graphic
 
 ## Usage
 
-When the program is running, you could either start a game, configure the board before starting, or quit the game.
+While the program is running, you could either start a game, configure the board before starting, or quit the game.
 
 All coordinates must be valid coordinates on a standard chess board, among a1 - h8.
 
 All pieces must be valid. (eg R, B, k, p ... where R is for white Rook, k is for Black King) 
 
-You can always type invalid input towards this program, it won't crash, just that you have to re-input again.
+You can always type invalid input towards this program. The program won't crash, instead, an error message is displayed and you may another input again.
 
 ## Start a game
 
 ```
-game player1 player2
+game PLAYER1 PLAYER2
 ```
 
-players must be valid, among
+PLAYER must be valid, and among one of the following options
 
 ```
 {human | computer1 | computer2 | computer3 | computer4}
 ```
 
-Here computer1 is the easiest level and computer4 is the hardest.
+Note: computer1 is the easiest level and computer4 is the most difficult.
 
-When started, input
+After a game is started, type input
 
 ```
-move coordinate coordinate
+move COORDINATE COORDINATE
 ```
 
 to move a piece as human.
-
-You have to indicate a valid piece to promote if needed.
+And type input
 
 ```
-move coordinate coordinate piece
+move
+```
+for computer players to take a move.
+
+You may indicate a valid piece to promote if needed.
+
+```
+move COORDINATE COORDINATE PIECE
 ```
 
 For human players, you can input
@@ -73,50 +79,43 @@ resign
 
 to give up this game. (Thus opponent wins.)
 
-Input
+
+Anytime you want to switch diffculty level during the game, input
 
 ```
-move
+setlevel LV
 ```
+LV must be a number between 1 and 4 inclusive.
 
-for computer players to take a move.
+You may try to set the level for human player, but you'll only get a warning.
 
-Anytime you want to switch diffculty level duing the game, input
-
-```
-setlevel lv
-```
-lv must be a number between 1 and 4 inclusively.
-
-You can try to set the level for human player, but only to get a warning.
-
-Ass a human player, you can also regret, simply input
+As a human player, you may also regret (i.e. undo your previous move YAY!), simply input
 
 ```
 regret
 ```
-After each move, the program will print the current board to tty and show who is the next player.
+After each move, the program will print the current board and indicate who is the next player.
 
 ## Configure the board
 
-Before a game started, or after a game finished, you can setup the board.
+Before a game start or after another game finish, you can customize the board set up.
 
-To add a piece by
+To add a piece, use the commad
 
 ```
-+ piece coordinate
++ PIECE COORDINATE
 ```
 
 To delete a piece
 
 ```
-- coordinate
+- COORDINATE
 ```
 
-To set Which side goes first
+To set which color goes first
 
 ```
-= color
+= COLOR
 ```
 Where color is one of
 
@@ -141,6 +140,6 @@ Whether you are in the middle of a chess game, finishing a chess game or setting
 ```
 Ctrl + D
 ```
-If you are in a game, the game will be abandoned (no score for both sides). 
+If you are in the middle of a game, the game will be abandoned (no score for both sides). 
 
-Before the program exits, it will print the final scores for both sides.
+Before the program exits, the program will print the final scores for both colors.
