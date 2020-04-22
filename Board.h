@@ -5,12 +5,12 @@
 
 class Board
 {
+public:
     vector<char> cells;
     bool isWhiteTurn{true};
     bool isCustomized{false};
     bool isGraphic{false};
 
-public:
     // Init to empty
     Board();
 

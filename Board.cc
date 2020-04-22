@@ -5,16 +5,15 @@
 Board::Board() : cells{vector<char>(64, '\0')} {}
 
 // Board(int n) Init to standard chess board.
-Board::Board(int n) : cells{vector<char> {
-    'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R',
-    'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P',
-    '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0',
-    '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0',
-    '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0',
-    '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0',
-    'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p',
-    'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'
-    }} {}
+Board::Board(int n) : cells{vector<char>{
+                          'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R',
+                          'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P',
+                          '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0',
+                          '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0',
+                          '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0',
+                          '\0', '\0', '\0', '\0', '\0', '\0', '\0', '\0',
+                          'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p',
+                          'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'}} {}
 
 // piece(idx) gets piece by cells index
 char &Board::piece(int idx)
@@ -54,7 +53,7 @@ void Board::setGraphic(bool graphic)
 }
 
 // setCustomized(isCustom) sets the field isCustomized to the given boolean
-void setCustomized(bool isCustom)
+void Board::setCustomized(bool isCustom)
 {
     isCustomized = isCustom;
 }
