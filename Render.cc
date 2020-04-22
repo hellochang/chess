@@ -24,13 +24,14 @@ void Render::printTextBoard(Board &b)
 // printGraphicBoard(b) displays the Board in graphics
 void Render::printGraphicBoard(Board &b)
 {
+    Xwindow w;
     w.fillRectangle(0, 0, 510, 510, Xwindow::White);
     w.drawString(10, 10, "Current board is:", Xwindow::Black);
 
     const int STRING_SIZE{35};
     const int CELL_SIZE{50};
     int x{STRING_SIZE};
-    for (int row{8}; row >= 1; --row)
+    for (int row = 8; row >= 1; --row)
     {
         // drawing the initial vertical numbered coordinates
         w.drawBigString(5, x + STRING_SIZE + 5, to_string(row) + "  ", Xwindow::Black);
@@ -40,11 +41,11 @@ void Render::printGraphicBoard(Board &b)
         {
             char pc = b.piece(row, col);
             bool isCellWhite{(row + col) % 2 ? true : false};
-            w.fillRectangle(y, x, CELL_SIZE, CELL_SIZE, isCellWhite ? Xwindow::White : Xwindow::Black);
+            w.fillRectangle(x, y, CELL_SIZE, CELL_SIZE, isCellWhite ? Xwindow::White : Xwindow::Black);
             if (pc)
             {
                 string s(1, pc);
-                w.drawBigString(y + 15, x + STRING_SIZE, s, Xwindow::Yellow);
+                w.drawBigString(x + 15, y + STRING_SIZE, s, Xwindow::Yellow);
             }
             y += CELL_SIZE + 1;
         }
@@ -57,8 +58,9 @@ void Render::printGraphicBoard(Board &b)
 // printBoard(b) displays the Board in graphic
 void Render::printBoard(Board &b)
 {
-    isGraphic ? printGraphicBoard(b) : printTextBoard(b);
-    
+    printTextBoard(b);
+    if (isGraphic)
+        printGraphicBoard(b);
 }
 
 // Render(isGraphic) constructs a Render object

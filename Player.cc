@@ -4,7 +4,7 @@
 Player::Player(Board &b, bool isWhite)
     : b{b}, isWhite{isWhite},
       myPieces{isWhite ? WHITEPIECESET : BLACKPIECESET},
-      canLongCastling{!b.isBoardCustomized()}, canShortCastling{!b.isBoardCustomized()} {}
+      canLongCastling{!b.checkCustomized()}, canShortCastling{!b.checkCustomized()} {}
 
 // Player() destroys the Player object
 Player::~Player() {}
@@ -85,7 +85,7 @@ bool Player::verify(int origIdx, int row,
     {
         if (oppo.lock()->idx.count(newIdx))
         {
-            if (b.cells[newIdx] == 'K' || b.cells[newIdx] == 'k')
+            if (b.piece(newIdx) == 'K' || b.piece(newIdx) == 'k')
             {
                 checkIdx[origIdx].insert(newIdx);
             }
@@ -96,7 +96,7 @@ bool Player::verify(int origIdx, int row,
     }
     if (checkMove)
     {
-        if (b.cells[newIdx] == 0)
+        if (b.piece(newIdx) == 0)
             moveIdx[origIdx].insert(newIdx);
         else
             cont = false;
@@ -138,38 +138,38 @@ bool Player::eval()
 
     int kingCount = 0;
     for (int i = 0; i < 64; ++i)
-        if (myPieces.count(b.cells[i]))
+        if (myPieces.count(b.piece(i)))
             idx.insert(i);
-        else if (oppo.lock()->myPieces.count(b.cells[i]))
+        else if (oppo.lock()->myPieces.count(b.piece(i)))
             oppo.lock()->idx.insert(i);
     for (auto i : idx)
     {
         int row = toRow(i);
         int col = toCol(i);
-        if (b.cells[i] == 'R' || b.cells[i] == 'r')
+        if (b.piece(i) == 'R' || b.piece(i) == 'r')
         {
             checkSameRC(i, row, col);
         }
-        else if (b.cells[i] == 'N' || b.cells[i] == 'n')
+        else if (b.piece(i) == 'N' || b.piece(i) == 'n')
         {
             checkKnight(i, row, col);
         }
-        else if (b.cells[i] == 'B' || b.cells[i] == 'b')
+        else if (b.piece(i) == 'B' || b.piece(i) == 'b')
         {
             checkSameDiag(i, row, col);
         }
-        else if (b.cells[i] == 'Q' || b.cells[i] == 'q')
+        else if (b.piece(i) == 'Q' || b.piece(i) == 'q')
         {
             checkSameRC(i, row, col);
             checkSameDiag(i, row, col);
         }
-        else if (b.cells[i] == 'K' || b.cells[i] == 'k')
+        else if (b.piece(i) == 'K' || b.piece(i) == 'k')
         {
             checkKing(i, row, col);
             KIdx = i;
             ++kingCount;
         }
-        else if (b.cells[i] == 'P') // Pawns are more complicated
+        else if (b.piece(i) == 'P') // Pawns are more complicated
         {
             if (row == 1 || row == 8)
                 return false;
@@ -214,7 +214,7 @@ bool Player::eval()
                 verify(i, row + 1, col + 1, false, true);
             }
         }
-        else if (b.cells[i] == 'p') // Pawns are more complicated
+        else if (b.piece(i) == 'p') // Pawns are more complicated
         {
             if (row == 1 || row == 8)
                 return false;

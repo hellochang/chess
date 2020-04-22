@@ -7,7 +7,6 @@
 
 class Render
 {
-    Xwindow w;
     bool isGraphic;
     void printTextBoard(Board &b);
     void printGraphicBoard(Board &b);
