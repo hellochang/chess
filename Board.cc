@@ -1,5 +1,5 @@
 #include "Board.h"
-//#include "window.h"
+#include "window.h"
 
 // Board() initialize to an empty Board
 Board::Board() : cells{vector<char>(64, '\0')} {}

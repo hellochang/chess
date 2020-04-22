@@ -62,7 +62,8 @@ public:
     // Destructor
     virtual ~Player();
 
-    //0 for EOF, 1 for lose, 2 for draw, 3 for regret, others for continue
+    // Make a move. For return values, 0 for EOF, 1 for lose,
+    //  2 for draw, 3 for regret, others for continue
     virtual int move() = 0;
 
     // Initialize attributes of Player

@@ -5,7 +5,7 @@
 #include "Human.h"
 #include "Computer.h"
 #include "Board.h"
-//#include "Display.h"
+#include "Display.h"
 
 class Game
 {
