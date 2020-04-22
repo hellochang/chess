@@ -7,15 +7,11 @@ int main(int argc, char **argv)
         Game game;
         game.startGame();
     }
-    else if (argc == 2)
+    else if (argc == 2 && string{argv[1]} == "--graphic")
     {
-        string flag{argv[1]};
-        if (flag == "--graphic")
-        {
-            Game game;
-            game.setGraphic(true);
-            game.startGame();
-        }
+        Game game;
+        game.setGraphic(true);
+        game.startGame();
     }
     else
     {
