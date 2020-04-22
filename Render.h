@@ -7,7 +7,6 @@
 
 class Render
 {
-private:
     bool isGraphic;
     void printTextBoard(Board &b);
     void printGraphicBoard(Board &b);

@@ -1,5 +1,6 @@
 #include "Render.h"
 
+// printTextBoard(b) displays the Board in text
 void Render::printTextBoard(Board &b)
 {
     cout << endl
@@ -19,6 +20,8 @@ void Render::printTextBoard(Board &b)
          << "  abcdefgh" << endl;
 }
 
+
+// printGraphicBoard(b) displays the Board in graphics
 void Render::printGraphicBoard(Board &b)
 {
     Xwindow w;
@@ -52,6 +55,7 @@ void Render::printGraphicBoard(Board &b)
     }
 }
 
+// printBoard(b) displays the Board in graphic
 void Render::printBoard(Board &b)
 {
     printTextBoard(b);
@@ -59,4 +63,5 @@ void Render::printBoard(Board &b)
         printGraphicBoard(b);
 }
 
+// Render(isGraphic) constructs a Render object
 Render::Render(bool isGraphic) : isGraphic{isGraphic} {}
