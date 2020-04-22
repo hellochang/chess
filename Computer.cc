@@ -58,7 +58,7 @@ int Computer::move()
                 return 2; // draw
             }
         }
-        else if (words.size() == 2 && words[0] == "setlevel" && words[1].length == 1)
+        else if (words.size() == 2 && words[0] == "setlevel" && words[1].length() == 1)
         {
             setLevel(words[1][0] - '0');
             return move();
@@ -219,5 +219,5 @@ void Computer::setLevel(int level)
     if (level < 1 || level > 4)
         cout << "Level setting failed. Out of range! (range: 1-4)" << endl;
     else
-        level = level;
+        this->level = level;
 }

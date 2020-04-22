@@ -47,7 +47,7 @@ int Human::move()
             cout << "Resign!" << endl;
             return 1;
         }
-        else if (words.size() == 2 && words[0] == "setlevel" && words[1].length == 1)
+        else if (words.size() == 2 && words[0] == "setlevel" && words[1].length() == 1)
         {
             setLevel(words[1][0] - '0');
             return move();
