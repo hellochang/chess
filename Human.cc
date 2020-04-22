@@ -47,6 +47,11 @@ int Human::move()
             cout << "Resign!" << endl;
             return 1;
         }
+        else if (words.size() == 2 && words[0] == "setlevel" && words[1].length == 1)
+        {
+            setLevel(words[1][0] - '0');
+            return move();
+        }
         else if (words.size() != 3 && words.size() != 4) // bad input
         {
             badInput();
@@ -141,6 +146,11 @@ int Human::move()
         }
     }
     return 0; // reach EOF
+}
+
+void Human::setLevel(int level)
+{
+    cout << "You cannot set a level for human players!" << endl;
 }
 
 // Debugging Code

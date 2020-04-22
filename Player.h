@@ -66,6 +66,9 @@ public:
     //  2 for draw, 3 for regret, others for continue
     virtual int move() = 0;
 
+    // Set level for Computer, produces error for Human
+    virtual void setLevel(int level) = 0;
+
     // Initialize attributes of Player
     //  (before move() or board validity checking)
     bool eval();
