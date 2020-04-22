@@ -6,7 +6,6 @@
 
 class Computer : public Player
 {
-private:
     int level;
 
     void moveLv1to3(int level);

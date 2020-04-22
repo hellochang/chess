@@ -50,7 +50,7 @@ public:
     Player(Board &b, bool isWhite);
 
     virtual ~Player();
-
+    
     //0 for EOF, 1 for lose, 2 for draw, 3 for regret, others for continue
     virtual int move() = 0;
 
