@@ -18,7 +18,7 @@ class Game
     shared_ptr<Player> p1;
     shared_ptr<Player> p2;
     Display display;
-    bool isGraphic{true};
+    bool isGraphic{false};
 
     // Runs game on current board
     bool run();
