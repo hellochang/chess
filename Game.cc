@@ -29,7 +29,7 @@ void Game::startGame()
             b = Board(1); // init board for next round
 	    if (isGraphic) b.setGraphic(true);
             #if 1
-	    cout << "b.isGraphic: " << b.isGraphic << endl;
+	    cout << "game is graphic: " << isGraphic << endl;
             #endif
         }
         // setup
@@ -40,7 +40,7 @@ void Game::startGame()
             if (!setup()) // reach EOF
                 break;
             cout << "Setup completed." << endl;
-            b.isCustomized = true;
+            b.setCustomized(true);
         }
         // bad input
         else
@@ -60,21 +60,21 @@ bool Game::run()
     for (;;)
     {
         display.printBoard(b);
-        cout << "Next Player to move is: Player" << (b.isWhiteTurn ? 1 : 2) << endl;
-        shared_ptr<Player> cur = b.isWhiteTurn ? p1 : p2;
-        int &oppoScore = b.isWhiteTurn ? BScore : WScore;
-        int &myScore = b.isWhiteTurn ? WScore : BScore;
+        cout << "Next Player to move is: Player" << (b.isBoardWhiteTurn() ? 1 : 2) << endl;
+        shared_ptr<Player> cur = b.isBoardWhiteTurn() ? p1 : p2;
+        int &oppoScore = b.isBoardWhiteTurn() ? BScore : WScore;
+        int &myScore = b.isBoardWhiteTurn() ? WScore : BScore;
         int res = cur->move();
         if (res < 0 || res > 3) // continue
         {
-            b.isWhiteTurn = !b.isWhiteTurn;
+            b.setWhiteTurn(!b.isBoardWhiteTurn());
             saveBoard();
         }
         else if (res == 0) // EOF
             return false;
         else if (res == 1)
         {
-            cout << "Player" << (b.isWhiteTurn ? 2 : 1) << " wins!" << endl;
+            cout << "Player" << (b.isBoardWhiteTurn() ? 2 : 1) << " wins!" << endl;
             oppoScore += 2;
             return true;
         }
@@ -149,8 +149,8 @@ bool Game::setup()
         {
             if (words.size() == 2 && (words[1] == "white" || words[1] == "black"))
             {
-                b.isWhiteTurn = (words[1] == "white");
-                cout << "Next Player to move is: Player" << (b.isWhiteTurn ? 1 : 2) << endl;
+                b.setWhiteTurn(words[1] == "white");
+                cout << "Next Player to move is: Player" << (b.isBoardWhiteTurn() ? 1 : 2) << endl;
             }
             else
                 badInput();

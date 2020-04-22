@@ -5,12 +5,12 @@
 
 class Board
 {
-public:
     vector<char> cells;
     bool isWhiteTurn{true};
     bool isCustomized{false};
     bool isGraphic{false};
-    
+
+public:  
     // Init to empty
     Board();
 
@@ -32,11 +32,21 @@ public:
     // Sets the graphics field to true or false
     void setGraphic(bool graphic);
 
+    // Sets the isWhiteTurn field to true or false
+    void setWhiteTurn(bool isWhite);
+
+    // Sets the isCustomized field to true or false
+    void setCustomized(bool isCustom);
+    
+    // Gets isWhiteTurn field 
+    bool isBoardWhiteTurn(); 
+
     // Prints board graphically (before move)
     void printGraphicBoard();
     
     // // Prints board (before move)
     // void printBoard();
+   
 };
 
 #endif

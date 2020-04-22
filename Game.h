@@ -5,7 +5,7 @@
 #include "Human.h"
 #include "Computer.h"
 #include "Board.h"
-#include "Display.h"
+//#include "Display.h"
 
 class Game
 {
@@ -17,7 +17,8 @@ class Game
     vector<Board> history;
     shared_ptr<Player> p1;
     shared_ptr<Player> p2;
-    Display display;
+//    Display display;
+    bool isGraphic{true};
 
     // Runs game on current board
     bool run();

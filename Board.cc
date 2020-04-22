@@ -1,5 +1,5 @@
 #include "Board.h"
-#include "window.h"
+//#include "window.h"
 
 // Board() initialize to an empty Board
 Board::Board() : cells{vector<char>(64, '\0')} {}
@@ -38,12 +38,30 @@ void Board::clear()
 }
 
 
+// setWhiteTurn(isWhite) sets the field isWhiteTurn
+void Board::setWhiteTurn(bool isWhite) {
+    isWhiteTurn = isWhite;
+}
+
+
+// isBoardWhiteTurn(isWhite) returns the value of the field isWhiteTurn
+bool Board::isBoardWhiteTurn() {
+    return isWhiteTurn;
+}
+
+
 // Sets the graphics field to true or false
 void Board::setGraphic(bool graphic)
 {
 	isGraphic = graphic;
 }
 	
+
+// setCustomized(isCustom) sets the field isCustomized to the given boolean
+void setCustomized(bool isCustom) {
+    isCustomized = isCustom;
+}
+
 
 // printBoard() prints the entire chess board
 void Board::printBoard()
@@ -68,7 +86,6 @@ void Board::printBoard()
     cout << endl
          << "  abcdefgh" << endl;
 }
-
 
 // printGraphicBoard() prints a Board graphically
 void Board::printGraphicBoard() {

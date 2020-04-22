@@ -4,7 +4,8 @@ int main(int argc, char **argv)
 {
     if (argc == 1)
     {
-        Game game{false};
+        Game game;
+        //Game game{false};
         game.startGame();
     }
     else if (argc == 2)
