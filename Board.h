@@ -34,6 +34,9 @@ public:
 
     // Prints board graphically (before move)
     void printGraphicBoard();
+    
+    // // Prints board (before move)
+    // void printBoard();
 };
 
 #endif

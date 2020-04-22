@@ -1,7 +1,7 @@
 CXX = clang++
 CXXFLAGS = -std=c++14 -Wall -Werror=vla -MMD -g
 EXEC = chess
-OBJECTS = main.o GLOBALS.o Game.o Board.o Player.o Human.o Computer.o window.o
+OBJECTS = main.o GLOBALS.o Game.o Board.o Player.o Human.o Computer.o Display.o window.o
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

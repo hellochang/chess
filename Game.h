@@ -5,6 +5,7 @@
 #include "Human.h"
 #include "Computer.h"
 #include "Board.h"
+#include "Display.h"
 
 class Game
 {
@@ -16,8 +17,8 @@ class Game
     vector<Board> history;
     shared_ptr<Player> p1;
     shared_ptr<Player> p2;
-    bool isGraphic{false};
-    
+    Display display;
+
     // Runs game on current board
     bool run();
 
@@ -42,6 +43,8 @@ public:
 
     // Set to true if the user choose graphic display
     void setGraphic(bool graphic);
+    
+   //  Game(bool isGraphic = false);
 };
 
 #endif
