@@ -6,6 +6,8 @@ The chess game.
 
 You may regret and undo as many of your moves as you want.
 
+You can dynamically set the difficulty level for Computer Players.
+
 ## Compile & Run
 
 ### Compile
