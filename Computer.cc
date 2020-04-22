@@ -19,11 +19,15 @@ int Computer::move()
     // provide castling moves when possible
     int kRow = toRow(KIdx), kCol = toCol(KIdx);
     int kshortDest = toIdx(kRow, kCol + 2), kLongDest = toIdx(kRow, kCol - 3);
-    if ((canShortCastling || canLongCastling) && !inCheck()) // no castling under checking
+     // no castling under checking
+    if ((canShortCastling || canLongCastling) && !inCheck())
     {
-        if (canShortCastling && b.cells[toIdx(kRow, kCol + 1)] == 0 && b.cells[toIdx(kRow, kCol + 2)] == 0)
+        if (canShortCastling && b.cells[toIdx(kRow, kCol + 1)] == 0 
+        && b.cells[toIdx(kRow, kCol + 2)] == 0)
             moveIdx[KIdx].insert(kshortDest);
-        if (canLongCastling && b.cells[toIdx(kRow, kCol - 1)] == 0 && b.cells[toIdx(kRow, kCol - 2)] == 0 && b.cells[toIdx(kRow, kCol - 3)] == 0)
+        if (canLongCastling && b.cells[toIdx(kRow, kCol - 1)] == 0 
+        && b.cells[toIdx(kRow, kCol - 2)] == 0 
+        && b.cells[toIdx(kRow, kCol - 3)] == 0)
             moveIdx[KIdx].insert(kLongDest);
     }
 
@@ -34,7 +38,8 @@ int Computer::move()
             continue;
         if (words.size() == 1 && words[0] == "move")
         {
-            if (moveIdx.size() + atkIdx.size() + checkIdx.size() + enPassantMove.size())
+            if (moveIdx.size() + atkIdx.size() + checkIdx.size() 
+            + enPassantMove.size())
             {
                 switch (level)
                 {
@@ -77,7 +82,8 @@ void Computer::moveLv1to3(int level)
         for (auto j : i.second)
             randomAtkSet.push_back(pair<int, int>{i.first, j});
     if (enPassantMove.size()) // add en passant move if possible
-        randomAtkSet.push_back(pair<int, int>{enPassantMove[0], enPassantMove[1]});
+        randomAtkSet.push_back(pair<int, int>
+        {enPassantMove[0], enPassantMove[1]});
     vector<pair<int, int>> randomSet = randomAtkSet; // all possible moves
     for (auto i : moveIdx)
         for (auto j : i.second)
@@ -120,7 +126,8 @@ void Computer::moveLv1to3(int level)
         }
         // nothing to avoid, drop to Lv2
     case 2:
-        if (randomAtkSet.size()) // if possible, prefer attacks over other moves
+    // if possible, prefer attacks over other moves
+        if (randomAtkSet.size()) 
             randomSet = randomAtkSet;
     case 1:
     default:
@@ -145,7 +152,8 @@ void Computer::moveLv1to3(int level)
     else
     {
         //  if this is a en passant move, capture that pawn
-        if (enPassantMove.size() && enPassantMove[0] == orig && enPassantMove[1] == dest)
+        if (enPassantMove.size() && enPassantMove[0] == orig 
+        && enPassantMove[1] == dest)
             b.cells[enPassantMove[2]] = 0;
         enPassantMove.clear();
 
@@ -156,17 +164,20 @@ void Computer::moveLv1to3(int level)
 
         // if this is a castling move, move correspond rook
         int kRow = toRow(KIdx), kCol = toCol(KIdx);
-        int kshortDest = toIdx(kRow, kCol + 2), kLongDest = toIdx(kRow, kCol - 3);
+        int kshortDest = toIdx(kRow, kCol + 2),
+         kLongDest = toIdx(kRow, kCol - 3);
         if ((canShortCastling || canLongCastling) && orig == KIdx)
         {
             if (dest == kshortDest)
             {
-                b.cells[toIdx(kRow, kCol + 1)] = b.cells[toIdx(kRow, kCol + 3)];
+                b.cells[toIdx(kRow, kCol + 1)] = 
+                b.cells[toIdx(kRow, kCol + 3)];
                 b.cells[toIdx(kRow, kCol + 3)] = 0;
             }
             else if (dest == kLongDest)
             {
-                b.cells[toIdx(kRow, kCol - 2)] = b.cells[toIdx(kRow, kCol - 4)];
+                b.cells[toIdx(kRow, kCol - 2)] = 
+                b.cells[toIdx(kRow, kCol - 4)];
                 b.cells[toIdx(kRow, kCol - 4)] = 0;
             }
         }

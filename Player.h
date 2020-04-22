@@ -16,16 +16,25 @@ class Player
     bool isWhite;
     const set<char> &myPieces;
     weak_ptr<Player> oppo;
-
-    int KIdx = -1;               // index for King
-    int enPassantIdx = -1;       // index for the pawn possible be captured by en passant
-    bool canLongCastling;        // indicate if the player can do long castling or not, init by ctor
-    bool canShortCastling;       // indicate if the player can do short castling or not, init by ctor
-    set<int> idx;                // indices for my remaining pieces
-    map<int, set<int>> moveIdx;  // indices that are movable and corresponding dests
-    map<int, set<int>> atkIdx;   // indices that can attack (but not check) and corresponding dests
-    map<int, set<int>> checkIdx; // indices that is checking opponent
-    vector<int> enPassantMove;   // valid only if oppo.lock()->enPassantIdx >= 0, arranged as {origIdx, destIdx, capturedIdx}
+    // index for King
+    int KIdx = -1;
+    // index for the pawn possible be captured by en passant
+    int enPassantIdx = -1;
+    // indicate if the player can do long castling or not, init by ctor
+    bool canLongCastling;
+    // indicate if the player can do short castling or not, init by ctor
+    bool canShortCastling;
+    // indices for my remaining pieces
+    set<int> idx;
+    // indices that are movable and corresponding dests
+    map<int, set<int>> moveIdx;
+    // indices that can attack (but not check) and corresponding dests
+    map<int, set<int>> atkIdx;
+    // indices that is checking opponent
+    map<int, set<int>> checkIdx;
+    // valid only if oppo.lock()->enPassantIdx >= 0,
+    //  arranged as {origIdx, destIdx, capturedIdx}
+    vector<int> enPassantMove;
 
     // Checks poses on the same row/col
     void checkSameRC(int origIdx, int row, int col);
@@ -59,7 +68,8 @@ public:
     // Set level for Computer, produces error for Human
     virtual void setLevel(int level) = 0;
 
-    // Initialize attributes of Player (before move() or board validity checking)
+    // Initialize attributes of Player
+    //  (before move() or board validity checking)
     bool eval();
 
     // Binds opponent ptr

@@ -22,21 +22,24 @@ void Game::startGame()
             else
                 p2 = make_shared<Computer>(b, false, words[2][8] - '0');
 
-            // If it the board has been set up, don't initialize it, and no castling
+            // If it the board has been set up
+            //  don't initialize it, and no castling
             //  for players on it
             if (!run()) // reach EOF
                 break;
             b = Board(1); // init board for next round
-	    if (isGraphic) b.setGraphic(true);
-            #if 1
-	    cout << "game is graphic: " << isGraphic << endl;
-            #endif
+            if (isGraphic)
+                b.setGraphic(true);
+#if 1
+            cout << "game is graphic: " << isGraphic << endl;
+#endif
         }
         // setup
         else if (words.size() == 1 && words[0] == "setup")
         {
-            b = Board();  // empty the board
-	    if (isGraphic) b.setGraphic(true);
+            b = Board(); // empty the board
+            if (isGraphic)
+                b.setGraphic(true);
             if (!setup()) // reach EOF
                 break;
             cout << "Setup completed." << endl;
@@ -60,7 +63,8 @@ bool Game::run()
     for (;;)
     {
         display.printBoard(b);
-        cout << "Next Player to move is: Player" << (b.isBoardWhiteTurn() ? 1 : 2) << endl;
+        cout << "Next Player to move is: Player"
+             << (b.isBoardWhiteTurn() ? 1 : 2) << endl;
         shared_ptr<Player> cur = b.isBoardWhiteTurn() ? p1 : p2;
         int &oppoScore = b.isBoardWhiteTurn() ? BScore : WScore;
         int &myScore = b.isBoardWhiteTurn() ? WScore : BScore;
@@ -74,7 +78,8 @@ bool Game::run()
             return false;
         else if (res == 1)
         {
-            cout << "Player" << (b.isBoardWhiteTurn() ? 2 : 1) << " wins!" << endl;
+            cout << "Player" << (b.isBoardWhiteTurn() ? 2 : 1)
+                 << " wins!" << endl;
             oppoScore += 2;
             return true;
         }
@@ -126,10 +131,12 @@ bool Game::setup()
         else if (words[0] == "+")
         {
             if (words.size() == 3 && words[1].size() == 1 &&
-                (WHITEPIECESET.count(words[1][0]) || BLACKPIECESET.count(words[1][0])) &&
+                (WHITEPIECESET.count(words[1][0]) ||
+                 BLACKPIECESET.count(words[1][0])) &&
                 validCoord(words[2]))
             {
-                b.piece(words[2][1] - '0', words[2][0] - 'a' + 1) = words[1][0];
+                b.piece(words[2][1] - '0',
+                        words[2][0] - 'a' + 1) = words[1][0];
                 display.printBoard(b);
             }
             else
@@ -147,10 +154,12 @@ bool Game::setup()
         }
         else if (words[0] == "=")
         {
-            if (words.size() == 2 && (words[1] == "white" || words[1] == "black"))
+            if (words.size() == 2 &&
+                (words[1] == "white" || words[1] == "black"))
             {
                 b.setWhiteTurn(words[1] == "white");
-                cout << "Next Player to move is: Player" << (b.isBoardWhiteTurn() ? 1 : 2) << endl;
+                cout << "Next Player to move is: Player"
+                     << (b.isBoardWhiteTurn() ? 1 : 2) << endl;
             }
             else
                 badInput();
@@ -163,8 +172,10 @@ bool Game::setup()
 void Game::printScores()
 {
     cout << "Final Score:" << endl
-         << "White: " << to_string(WScore / 2) + (WScore % 2 ? ".5" : "") << endl
-         << "Black: " << to_string(BScore / 2) + (BScore % 2 ? ".5" : "") << endl;
+         << "White: "
+         << to_string(WScore / 2) + (WScore % 2 ? ".5" : "") << endl
+         << "Black: "
+         << to_string(BScore / 2) + (BScore % 2 ? ".5" : "") << endl;
 }
 
 // validBoard() checks validity of chess board
@@ -181,9 +192,11 @@ bool Game::validBoard()
 // printMenu() prints the menu of the game
 void Game::printMenu()
 {
-    cout << "*************************   CHESS   *************************" << endl
+    cout << "*************************   CHESS   *************************"
+         << endl
          << "Press Ctrl + D to quit and show scores" << endl
-         << "Type game [human/computer[1-4]] [human/computer[1-4]] to play" << endl
+         << "Type game [human/computer[1-4]] [human/computer[1-4]] to play"
+         << endl
          << "Type setup to create a board" << endl;
 }
 
@@ -193,9 +206,9 @@ void Game::saveBoard()
     history.push_back(b);
 }
 
-
 // isGraphic() checks whether the graphic option is invoked
-void Game::setGraphic(bool graphic) {
+void Game::setGraphic(bool graphic)
+{
     isGraphic = graphic;
 }
 
