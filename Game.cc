@@ -212,4 +212,3 @@ void Game::setGraphic(bool graphic)
     isGraphic = graphic;
 }
 
-// Game::Game(bool isGraphic = false) : display{isGraphic} {}
