@@ -26,7 +26,8 @@ using namespace std;
 
 const set<char> WHITEPIECESET{'R', 'N', 'B', 'Q', 'K', 'B', 'K', 'R', 'P'};
 const set<char> BLACKPIECESET{'r', 'n', 'b', 'q', 'k', 'b', 'k', 'r', 'p'};
-const set<string> VALIDPLAYERS{"human", "computer1", "computer2", "computer3", "compouter4"};
+const set<string> VALIDPLAYERS{"human", "computer1",
+                               "computer2", "computer3", "compouter4"};
 const set<string> VALIDSETUPOPS{"+", "-", "=", "done"};
 
 // Coordinates defined in the first coordinate

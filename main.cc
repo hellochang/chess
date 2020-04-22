@@ -17,10 +17,10 @@ int main(int argc, char **argv)
             //  we should let game has an GUI object of GUI class
             //  every time we call Board::printBoard(),
             //  send new board info to that object call some method
-	    Game game;
-	    game.setGraphic(true);
-	    game.startGame();
-            
+            Game game;
+            game.setGraphic(true);
+            game.startGame();
+
             // Game game{true};
             // game.startGame();
         }

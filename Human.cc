@@ -3,7 +3,6 @@
 // Human(b, isWhite) constructs a Human object
 Human::Human(Board &b, bool isWhite) : Player(b, isWhite) {}
 
-
 // move() makes a move and returns indicator values (0 for EOF,
 //   1 for lose, 2 for draw, 3 for regret, others for continue)
 int Human::move()
@@ -20,7 +19,8 @@ int Human::move()
     // provide castling moves when possible
     int kRow = toRow(KIdx), kCol = toCol(KIdx);
     int kshortDest = toIdx(kRow, kCol + 2), kLongDest = toIdx(kRow, kCol - 3);
-    if ((canShortCastling || canLongCastling) && !inCheck()) // no castling under checking
+    // no castling under checking
+    if ((canShortCastling || canLongCastling) && !inCheck())
     {
         if (canShortCastling && b.cells[toIdx(kRow, kCol + 1)] == 0 && b.cells[toIdx(kRow, kCol + 2)] == 0)
             moveIdx[KIdx].insert(kshortDest);
@@ -143,22 +143,25 @@ int Human::move()
     return 0; // reach EOF
 }
 
-// cerr << "DEBUG: Got here!~" << endl;
-// cerr << "Idx:" << endl;
-// for (auto i : idx)
-//     cerr << "    " << (int)i << endl;
-// cerr << "moveIdx:" << endl;
-// for (auto i : moveIdx)
-// {
-//     cerr << "    From: " << (int)toRow(i.first) << "," << (int)toCol(i.first) << endl;
-//     for (auto j : i.second)
-//         cerr << "        To: " << (int)toRow(j) << "," << (int)toCol(j) << endl;
-// }
-// cerr << "atkIdx:" << endl;
-// for (auto i : atkIdx)
-// {
-//     cerr << "    From: " << (int)toRow(i.first) << "," << (int)toCol(i.first) << endl;
-//     for (auto j : i.second)
-//         cerr << "        To: " << (int)toRow(j) << "," << (int)toCol(j) << endl;
-// }
-// cerr << "DEBUG: Got here!~" << endl;
+// Debugging Code
+#if 0
+cerr << "DEBUG: Got here!~" << endl;
+cerr << "Idx:" << endl;
+for (auto i : idx)
+    cerr << "    " << (int)i << endl;
+cerr << "moveIdx:" << endl;
+for (auto i : moveIdx)
+{
+    cerr << "    From: " << (int)toRow(i.first) << "," << (int)toCol(i.first) << endl;
+    for (auto j : i.second)
+        cerr << "        To: " << (int)toRow(j) << "," << (int)toCol(j) << endl;
+}
+cerr << "atkIdx:" << endl;
+for (auto i : atkIdx)
+{
+    cerr << "    From: " << (int)toRow(i.first) << "," << (int)toCol(i.first) << endl;
+    for (auto j : i.second)
+        cerr << "        To: " << (int)toRow(j) << "," << (int)toCol(j) << endl;
+}
+cerr << "DEBUG: Got here!~" << endl;
+#endif

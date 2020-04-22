@@ -2,13 +2,12 @@
 
 // Player(b, isWhite) constructs the Player object
 Player::Player(Board &b, bool isWhite)
-    : b{b}, isWhite{isWhite}, myPieces{isWhite ? WHITEPIECESET : BLACKPIECESET},
+    : b{b}, isWhite{isWhite},
+      myPieces{isWhite ? WHITEPIECESET : BLACKPIECESET},
       canLongCastling{!b.isCustomized}, canShortCastling{!b.isCustomized} {}
-
 
 // Player() destroys the Player object
 Player::~Player() {}
-
 
 // checkSameRC(origIdx, row, col) checks poses on the same row/col
 void Player::checkSameRC(int origIdx, int row, int col)
@@ -27,7 +26,6 @@ void Player::checkSameRC(int origIdx, int row, int col)
             break;
 }
 
-
 // checkSameDiag(origIdx, row, col) checks poses on the same diagonal
 void Player::checkSameDiag(int origIdx, int row, int col)
 {
@@ -45,8 +43,8 @@ void Player::checkSameDiag(int origIdx, int row, int col)
             break;
 }
 
-
-// checkKnight(int origIdx, int row, int col) checks 8 possible poses for Knight
+// checkKnight(int origIdx, int row, int col) checks 8 possible
+//  poses for Knight
 void Player::checkKnight(int origIdx, int row, int col)
 {
     verify(origIdx, row + 1, col + 2);
@@ -58,7 +56,6 @@ void Player::checkKnight(int origIdx, int row, int col)
     verify(origIdx, row - 2, col + 1);
     verify(origIdx, row - 2, col - 1);
 }
-
 
 // checkKing(origIdx, row, col) checks 8 possible poses for King
 void Player::checkKing(int origIdx, int row, int col)
@@ -73,10 +70,10 @@ void Player::checkKing(int origIdx, int row, int col)
     verify(origIdx, row + 1, col + 1);
 }
 
-
-// verify(origIdx, row, col, checkMove, checkAtk) verifys if a move 
+// verify(origIdx, row, col, checkMove, checkAtk) verifys if a move
 //  is valid, if yes, insert it to corresponding set
-bool Player::verify(int origIdx, int row, int col, bool checkMove, bool checkAtk)
+bool Player::verify(int origIdx, int row,
+                    int col, bool checkMove, bool checkAtk)
 {
     if (!(1 <= row && row <= 8) || !(1 <= col && col <= 8))
         return false;
@@ -107,7 +104,6 @@ bool Player::verify(int origIdx, int row, int col, bool checkMove, bool checkAtk
     return cont;
 }
 
-
 // avoidKingKillingMove() invoked to avoid moves that puts King in check
 void Player::avoidKingKillingMove()
 {
@@ -127,8 +123,8 @@ void Player::avoidKingKillingMove()
             checkIdx[KIdx].erase(i);
 }
 
-
-// eval() initialize attributes of Player (before move() or board validity checking)
+// eval() initialize attributes of Player
+//  (before move() or board validity checking)
 bool Player::eval()
 {
     KIdx = -1;
@@ -191,14 +187,18 @@ bool Player::eval()
                 if (oppo.lock()->enPassantIdx == left)
                 {
                     verify(i, row + 1, col, true, false);
-                    enPassantMove = vector<int>{i, toIdx(row + 1, col - 1), left};
+                    enPassantMove = vector<int>{i,
+                                                toIdx(row + 1, col - 1),
+                                                left};
                     verify(i, row + 1, col + 1, false, true);
                 }
                 else if (oppo.lock()->enPassantIdx == right)
                 {
                     verify(i, row + 1, col, true, false);
                     verify(i, row + 1, col - 1, false, true);
-                    enPassantMove = vector<int>{i, toIdx(row + 1, col + 1), right};
+                    enPassantMove = vector<int>{i,
+                                                toIdx(row + 1, col + 1),
+                                                right};
                 }
                 else
                 {
@@ -232,14 +232,17 @@ bool Player::eval()
                 if (oppo.lock()->enPassantIdx == left)
                 {
                     verify(i, row - 1, col, true, false);
-                    enPassantMove = vector<int>{i, toIdx(row - 1, col - 1), left};
+                    enPassantMove = vector<int>{i,
+                                                toIdx(row - 1, col - 1), left};
                     verify(i, row - 1, col + 1, false, true);
                 }
                 else if (oppo.lock()->enPassantIdx == right)
                 {
                     verify(i, row - 1, col, true, false);
                     verify(i, row - 1, col - 1, false, true);
-                    enPassantMove = vector<int>{i, toIdx(row - 1, col + 1), right};
+                    enPassantMove = vector<int>{i,
+                                                toIdx(row - 1, col + 1),
+                                                right};
                 }
                 else
                 {
@@ -259,13 +262,11 @@ bool Player::eval()
     return kingCount == 1;
 }
 
-
 // bindOppo (other) binds opponent ptr
 void Player::bindOppo(shared_ptr<Player> other)
 {
     oppo = other;
 }
-
 
 // inCheck() returns true if checked
 bool Player::inCheck()

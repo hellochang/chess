@@ -10,7 +10,7 @@ class Board
     bool isCustomized{false};
     bool isGraphic{false};
 
-public:  
+public:
     // Init to empty
     Board();
 
@@ -28,7 +28,7 @@ public:
 
     // Prints board (before move)
     void printBoard();
-    
+
     // Sets the graphics field to true or false
     void setGraphic(bool graphic);
 
@@ -37,16 +37,15 @@ public:
 
     // Sets the isCustomized field to true or false
     void setCustomized(bool isCustom);
-    
-    // Gets isWhiteTurn field 
-    bool isBoardWhiteTurn(); 
+
+    // Gets isWhiteTurn field
+    bool isBoardWhiteTurn();
 
     // Prints board graphically (before move)
     void printGraphicBoard();
-    
+
     // // Prints board (before move)
     // void printBoard();
-   
 };
 
 #endif
