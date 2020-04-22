@@ -44,8 +44,6 @@ public:
 
     // Set to true if the user choose graphic display
     void setGraphic(bool graphic);
-    
-   //  Game(bool isGraphic = false);
 };
 
 #endif
