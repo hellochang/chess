@@ -10,6 +10,8 @@ public:
     Human(Board &b, bool isWhite);
 
     virtual int move() override;
+
+    virtual void setLevel(int level) override;
 };
 
 #endif

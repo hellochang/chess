@@ -16,6 +16,8 @@ public:
     Computer(Board &b, bool isWhite, int level = 1);
 
     virtual int move() override;
+
+    virtual void setLevel(int level) override;
 };
 
 #endif

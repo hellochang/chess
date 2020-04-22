@@ -3,7 +3,6 @@
 // Human(b, isWhite) constructs a Human object
 Human::Human(Board &b, bool isWhite) : Player(b, isWhite) {}
 
-
 // move() makes a move and returns indicator values (0 for EOF,
 //   1 for lose, 2 for draw, 3 for regret, others for continue)
 int Human::move()
@@ -46,6 +45,11 @@ int Human::move()
         {
             cout << "Resign!" << endl;
             return 1;
+        }
+        else if (words.size() == 2 && words[0] == "setlevel" && words[1].length == 1)
+        {
+            setLevel(words[1][0] - '0');
+            return move();
         }
         else if (words.size() != 3 && words.size() != 4) // bad input
         {
@@ -143,22 +147,7 @@ int Human::move()
     return 0; // reach EOF
 }
 
-// cerr << "DEBUG: Got here!~" << endl;
-// cerr << "Idx:" << endl;
-// for (auto i : idx)
-//     cerr << "    " << (int)i << endl;
-// cerr << "moveIdx:" << endl;
-// for (auto i : moveIdx)
-// {
-//     cerr << "    From: " << (int)toRow(i.first) << "," << (int)toCol(i.first) << endl;
-//     for (auto j : i.second)
-//         cerr << "        To: " << (int)toRow(j) << "," << (int)toCol(j) << endl;
-// }
-// cerr << "atkIdx:" << endl;
-// for (auto i : atkIdx)
-// {
-//     cerr << "    From: " << (int)toRow(i.first) << "," << (int)toCol(i.first) << endl;
-//     for (auto j : i.second)
-//         cerr << "        To: " << (int)toRow(j) << "," << (int)toCol(j) << endl;
-// }
-// cerr << "DEBUG: Got here!~" << endl;
+void Human::setLevel(int level)
+{
+    cout << "You cannot set a level for human players!" << endl;
+}
