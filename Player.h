@@ -43,12 +43,14 @@ class Player
     bool verify(int origIdx, int row, int col,
                 bool checkMove = true, bool checkAtk = true);
 
-    // move out king-killing moves from three "moveable" sets
+    // Move out king-killing moves from three "moveable" sets
     void avoidKingKillingMove();
 
 public:
+    // Constructor
     Player(Board &b, bool isWhite);
 
+    // Destructor
     virtual ~Player();
     
     //0 for EOF, 1 for lose, 2 for draw, 3 for regret, others for continue

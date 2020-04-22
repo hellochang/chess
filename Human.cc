@@ -1,7 +1,11 @@
 #include "Human.h"
 
+// Human(b, isWhite) constructs a Human object
 Human::Human(Board &b, bool isWhite) : Player(b, isWhite) {}
 
+
+// move() makes a move and returns indicator values (0 for EOF,
+//   1 for lose, 2 for draw, 3 for regret, others for continue)
 int Human::move()
 {
     // init

@@ -10,7 +10,7 @@ Player::Player(Board &b, bool isWhite)
 Player::~Player() {}
 
 
-// 
+// checkSameRC(origIdx, row, col) checks poses on the same row/col
 void Player::checkSameRC(int origIdx, int row, int col)
 {
     for (int j = col + 1;; ++j)
@@ -27,6 +27,8 @@ void Player::checkSameRC(int origIdx, int row, int col)
             break;
 }
 
+
+// checkSameDiag(origIdx, row, col) checks poses on the same diagonal
 void Player::checkSameDiag(int origIdx, int row, int col)
 {
     for (int j = 1;; ++j)
@@ -43,6 +45,8 @@ void Player::checkSameDiag(int origIdx, int row, int col)
             break;
 }
 
+
+// checkKnight(int origIdx, int row, int col) checks 8 possible poses for Knight
 void Player::checkKnight(int origIdx, int row, int col)
 {
     verify(origIdx, row + 1, col + 2);
@@ -55,6 +59,8 @@ void Player::checkKnight(int origIdx, int row, int col)
     verify(origIdx, row - 2, col - 1);
 }
 
+
+// checkKing(origIdx, row, col) checks 8 possible poses for King
 void Player::checkKing(int origIdx, int row, int col)
 {
     verify(origIdx, row - 1, col - 1);
@@ -67,6 +73,9 @@ void Player::checkKing(int origIdx, int row, int col)
     verify(origIdx, row + 1, col + 1);
 }
 
+
+// verify(origIdx, row, col, checkMove, checkAtk) verifys if a move 
+//  is valid, if yes, insert it to corresponding set
 bool Player::verify(int origIdx, int row, int col, bool checkMove, bool checkAtk)
 {
     if (!(1 <= row && row <= 8) || !(1 <= col && col <= 8))
@@ -98,6 +107,8 @@ bool Player::verify(int origIdx, int row, int col, bool checkMove, bool checkAtk
     return cont;
 }
 
+
+// avoidKingKillingMove() invoked to avoid moves that puts King in check
 void Player::avoidKingKillingMove()
 {
     set<int> underAtk; // poses under attack
@@ -116,6 +127,8 @@ void Player::avoidKingKillingMove()
             checkIdx[KIdx].erase(i);
 }
 
+
+// eval() initialize attributes of Player (before move() or board validity checking)
 bool Player::eval()
 {
     KIdx = -1;
@@ -246,10 +259,13 @@ bool Player::eval()
     return kingCount == 1;
 }
 
+
+// bindOppo (other) binds opponent ptr
 void Player::bindOppo(shared_ptr<Player> other)
 {
     oppo = other;
 }
+
 
 // inCheck() returns true if checked
 bool Player::inCheck()

@@ -1,8 +1,13 @@
 #include "Computer.h"
 
+
+// Computer(b, isWhite, level) constructs a Computer object
 Computer::Computer(Board &b, bool isWhite, int level)
     : Player(b, isWhite), level{level} {}
 
+
+// move() makes a move and returns indicator values (0 for EOF, 1 for lose,
+//   2 for draw, 3 for regret, others for continue)
 int Computer::move()
 {
     eval();
@@ -56,6 +61,8 @@ int Computer::move()
     return 0; // reach EOF
 }
 
+
+// moveLv1to3(level) makes a move for Level 1 to 3
 void Computer::moveLv1to3(int level)
 {
     int orig, dest; // the move to be done
@@ -188,6 +195,8 @@ void Computer::moveLv1to3(int level)
     }
 }
 
+
+// moveLv4(level) makes a move for Level 4
 void Computer::moveLv4()
 {
     moveLv1to3(3);
