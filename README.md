@@ -4,7 +4,7 @@ The chess game.
 
 ## Extra Features
 
-You can regret and undo as many of your moves as you want.
+You may regret and undo as many of your moves as you want.
 
 ## Compile & Run
 
@@ -19,7 +19,7 @@ make
 ```
 ./chess
 ```
-The above commad will have a text display.
+The above commad starts a chess game that has a text display.
 For graphic interface, execute with flag --graphic
 ```
 ./chess --graphic
@@ -27,13 +27,13 @@ For graphic interface, execute with flag --graphic
 
 ## Usage
 
-When the program is running, you can either start a game, configure the board before starting, or quit the game.
+When the program is running, you could either start a game, configure the board before starting, or quit the game.
 
 All coordinates must be valid coordinates on a standard chess board, among a1 - h8.
 
-All pieces must be valid. (eg R, B, k, p ...)
+All pieces must be valid. (eg R, B, k, p ... where R is for white Rook, k is for Black King) 
 
-You can always type invalid input towards this program, and it won't crash, just that you have to re-input again.
+You can always type invalid input towards this program, it won't crash, just that you have to re-input again.
 
 ## Start a game
 
