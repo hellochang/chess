@@ -22,9 +22,9 @@ int Human::move()
     // no castling under checking
     if ((canShortCastling || canLongCastling) && !inCheck())
     {
-        if (canShortCastling && b.piece(toIdx(kRow, kCol + 1)) == 0 && b.piece(toIdx(kRow, kCol + 2)) == 0)
+        if (canShortCastling && b.cells[toIdx(kRow, kCol + 1)] == 0 && b.cells[toIdx(kRow, kCol + 2)] == 0)
             moveIdx[KIdx].insert(kshortDest);
-        if (canLongCastling && b.piece(toIdx(kRow, kCol - 1)) == 0 && b.piece(toIdx(kRow, kCol - 2)) == 0 && b.piece(toIdx(kRow, kCol - 3)) == 0)
+        if (canLongCastling && b.cells[toIdx(kRow, kCol - 1)] == 0 && b.cells[toIdx(kRow, kCol - 2)] == 0 && b.cells[toIdx(kRow, kCol - 3)] == 0)
             moveIdx[KIdx].insert(kLongDest);
     }
 
@@ -74,10 +74,10 @@ int Human::move()
         else
         {
             bool promo = false;
-            if ((b.piece(orig) == 'P' && toRow(orig) == 7) ||
-                (b.piece(orig) == 'p' && toRow(orig) == 2)) // pawn about to promote
+            if ((b.cells[orig] == 'P' && toRow(orig) == 7) ||
+                (b.cells[orig] == 'p' && toRow(orig) == 2)) // pawn about to promote
             {
-                if (words.size() == 4 && words[3][0] != b.piece(orig) &&
+                if (words.size() == 4 && words[3][0] != b.cells[orig] &&
                     myPieces.count(words[3][0]))
                     promo = true;
                 else
@@ -95,12 +95,12 @@ int Human::move()
 
             //  if this is a en passant move, capture that pawn
             if (enPassantMove.size() && enPassantMove[0] == orig && enPassantMove[1] == dest)
-                b.piece(enPassantMove[2]) = 0;
+                b.cells[enPassantMove[2]] = 0;
             enPassantMove.clear();
 
             //  if this move gives opponent a chance to en passant, flag it
-            if ((b.piece(orig) == 'P' && toRow(orig) == 2 && toRow(dest) == 4) ||
-                (b.piece(orig) == 'p' && toRow(orig) == 7 && toRow(dest) == 5))
+            if ((b.cells[orig] == 'P' && toRow(orig) == 2 && toRow(dest) == 4) ||
+                (b.cells[orig] == 'p' && toRow(orig) == 7 && toRow(dest) == 5))
                 enPassantIdx = dest;
 
             // if this is a castling move, move correspond rook
@@ -108,18 +108,18 @@ int Human::move()
             {
                 if (dest == kshortDest)
                 {
-                    b.piece(toIdx(kRow, kCol + 1)) = b.piece(toIdx(kRow, kCol + 3));
-                    b.piece(toIdx(kRow, kCol + 3)) = 0;
+                    b.cells[toIdx(kRow, kCol + 1)] = b.cells[toIdx(kRow, kCol + 3)];
+                    b.cells[toIdx(kRow, kCol + 3)] = 0;
                 }
                 else if (dest == kLongDest)
                 {
-                    b.piece(toIdx(kRow, kCol - 2)) = b.piece(toIdx(kRow, kCol - 4));
-                    b.piece(toIdx(kRow, kCol - 4)) = 0;
+                    b.cells[toIdx(kRow, kCol - 2)] = b.cells[toIdx(kRow, kCol - 4)];
+                    b.cells[toIdx(kRow, kCol - 4)] = 0;
                 }
             }
 
-            b.piece(dest) = promo ? words[3][0] : b.piece(orig);
-            b.piece(orig) = 0;
+            b.cells[dest] = promo ? words[3][0] : b.cells[orig];
+            b.cells[orig] = 0;
 
             // if king/rooks is moved, disable corresponding castling
             if (orig == KIdx)
@@ -129,16 +129,16 @@ int Human::move()
             }
             if (isWhite)
             {
-                if (b.piece(toIdx(1, 1)) != 'R')
+                if (b.cells[toIdx(1, 1)] != 'R')
                     canLongCastling = false;
-                if ((b.piece(toIdx(1, 8))) != 'R')
+                if ((b.cells[toIdx(1, 8)]) != 'R')
                     canShortCastling = false;
             }
             else
             {
-                if (b.piece(toIdx(8, 1)) != 'r')
+                if (b.cells[toIdx(8, 1)] != 'r')
                     canLongCastling = false;
-                if ((b.piece(toIdx(8, 8))) != 'r')
+                if ((b.cells[toIdx(8, 8)]) != 'r')
                     canShortCastling = false;
             }
 

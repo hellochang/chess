@@ -201,7 +201,5 @@ void Game::saveBoard()
     history.push_back(b);
 }
 
-// isGraphic() checks whether the graphic option is invoked
-// todo
 
 Game::Game(bool isGraphic) : render{isGraphic} {}
