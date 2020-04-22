@@ -43,8 +43,8 @@ public:
     // Gets isWhiteTurn field
     bool isBoardWhiteTurn();
 
-    // Prints board graphically (before move)
-    void printGraphicBoard();
+    // // Prints board graphically (before move)
+    // void printGraphicBoard();
 
     // // Prints board (before move)
     // void printBoard();
