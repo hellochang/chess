@@ -5,8 +5,10 @@
 #include "GLOBALS.h"
 #include "Board.h"
 
+// Render class renders the chessboard
 class Render
 {
+    unique_ptr<Xwindow> wd;
     bool isGraphic;
     void printTextBoard(Board &b);
     void printGraphicBoard(Board &b);
@@ -17,3 +19,4 @@ public:
 };
 
 #endif
+

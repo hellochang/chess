@@ -51,3 +51,4 @@ void badInput()
 {
     cout << "Invalid input! Please try again!" << endl;
 }
+

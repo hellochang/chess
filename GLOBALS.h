@@ -57,3 +57,4 @@ bool getWords(vector<string> &words);
 void badInput();
 
 #endif
+
