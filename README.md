@@ -1,6 +1,6 @@
 # Chess
 
-The chess game.
+Just a chess game made in C++ with a simple GUI
 
 ## Extra Features
 
