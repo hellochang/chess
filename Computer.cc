@@ -22,9 +22,9 @@ int Computer::move()
     // no castling under checking
     if ((canShortCastling || canLongCastling) && !inCheck())
     {
-        if (canShortCastling && b.piece(toIdx(kRow, kCol + 1)) == 0 && b.piece(toIdx(kRow, kCol + 2)) == 0)
+        if (canShortCastling && b.cells[toIdx(kRow, kCol + 1)] == 0 && b.cells[toIdx(kRow, kCol + 2)] == 0)
             moveIdx[KIdx].insert(kshortDest);
-        if (canLongCastling && b.piece(toIdx(kRow, kCol - 1)) == 0 && b.piece(toIdx(kRow, kCol - 2)) == 0 && b.piece(toIdx(kRow, kCol - 3)) == 0)
+        if (canLongCastling && b.cells[toIdx(kRow, kCol - 1)] == 0 && b.cells[toIdx(kRow, kCol - 2)] == 0 && b.cells[toIdx(kRow, kCol - 3)] == 0)
             moveIdx[KIdx].insert(kLongDest);
     }
 
@@ -133,8 +133,8 @@ void Computer::moveLv1to3(int level)
         dest = randomSet[choice].second;
         break;
     }
-    bool promo = (b.piece(orig) == 'P' && toRow(orig) == 7) ||
-                 (b.piece(orig) == 'p' && toRow(orig) == 2);
+    bool promo = (b.cells[orig] == 'P' && toRow(orig) == 7) ||
+                 (b.cells[orig] == 'p' && toRow(orig) == 2);
     if (promo)
     {
         vector<char> promoSel;
@@ -142,19 +142,19 @@ void Computer::moveLv1to3(int level)
             if (i != 'k' && i != 'K')
                 promoSel.push_back(i);
         char promotedTo = promoSel[rand() % promoSel.size()];
-        b.piece(dest) = promotedTo;
-        b.piece(orig) = 0;
+        b.cells[dest] = promotedTo;
+        b.cells[orig] = 0;
     }
     else
     {
         //  if this is a en passant move, capture that pawn
         if (enPassantMove.size() && enPassantMove[0] == orig && enPassantMove[1] == dest)
-            b.piece(enPassantMove[2]) = 0;
+            b.cells[enPassantMove[2]] = 0;
         enPassantMove.clear();
 
         //  if this move gives opponent a chance to en passant, flag it
-        if ((b.piece(orig) == 'P' && toRow(orig) == 2 && toRow(dest) == 4) ||
-            (b.piece(orig) == 'p' && toRow(orig) == 7 && toRow(dest) == 5))
+        if ((b.cells[orig] == 'P' && toRow(orig) == 2 && toRow(dest) == 4) ||
+            (b.cells[orig] == 'p' && toRow(orig) == 7 && toRow(dest) == 5))
             enPassantIdx = dest;
 
         // if this is a castling move, move correspond rook
@@ -165,20 +165,20 @@ void Computer::moveLv1to3(int level)
         {
             if (dest == kshortDest)
             {
-                b.piece(toIdx(kRow, kCol + 1)) =
-                    b.piece(toIdx(kRow, kCol + 3));
-                b.piece(toIdx(kRow, kCol + 3)) = 0;
+                b.cells[toIdx(kRow, kCol + 1)] =
+                    b.cells[toIdx(kRow, kCol + 3)];
+                b.cells[toIdx(kRow, kCol + 3)] = 0;
             }
             else if (dest == kLongDest)
             {
-                b.piece(toIdx(kRow, kCol - 2)) =
-                    b.piece(toIdx(kRow, kCol - 4));
-                b.piece(toIdx(kRow, kCol - 4)) = 0;
+                b.cells[toIdx(kRow, kCol - 2)] =
+                    b.cells[toIdx(kRow, kCol - 4)];
+                b.cells[toIdx(kRow, kCol - 4)] = 0;
             }
         }
 
-        b.piece(dest) = b.piece(orig);
-        b.piece(orig) = 0;
+        b.cells[dest] = b.cells[orig];
+        b.cells[orig] = 0;
 
         // if king/rooks is moved, disable corresponding castling
         if (orig == KIdx)
@@ -188,16 +188,16 @@ void Computer::moveLv1to3(int level)
         }
         if (isWhite)
         {
-            if (b.piece(toIdx(1, 1)) != 'R')
+            if (b.cells[toIdx(1, 1)] != 'R')
                 canLongCastling = false;
-            if ((b.piece(toIdx(1, 8))) != 'R')
+            if ((b.cells[toIdx(1, 8)]) != 'R')
                 canShortCastling = false;
         }
         else
         {
-            if (b.piece(toIdx(8, 1)) != 'r')
+            if (b.cells[toIdx(8, 1)] != 'r')
                 canLongCastling = false;
-            if ((b.piece(toIdx(8, 8))) != 'r')
+            if ((b.cells[toIdx(8, 8)]) != 'r')
                 canShortCastling = false;
         }
     }
@@ -216,3 +216,4 @@ void Computer::setLevel(int level)
     else
         this->level = level;
 }
+
